@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Titres Innovants | Détails du Sujet</title>
+    <style>
+        :root {
+            --bg-color: #1a1a2e;
+            --card-bg: #2d2d44;
+            --text-color: #e0e0e0;
+            --accent-color: #00bcd4;
+            --border-color: #3f3f5a;
+            --gradient-start: #2d2d44;
+            --gradient-end: #1a1a2e;
+            --mono-font: 'Roboto Mono', monospace;
+            --sans-font: 'Inter', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Roboto+Mono:wght@400&display=swap');
+
+        body {
+            font-family: var(--sans-font);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            width: 100%;
+            padding: 40px 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            letter-spacing: -0.03em;
+        }
+
+        header p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #b0b0d0;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            width: 100%;
+            max-width: 1100px;
+            padding: 0 20px 60px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(0, 188, 212, 0.1) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .tool-section {
+            grid-column: 1;
+        }
+
+        .tool-section h2, .results-section h2 {
+            color: var(--accent-color);
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(0, 188, 212, 0.3);
+            padding-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #c0c0e0;
+        }
+
+        input[type="text"], textarea, select {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--gradient-start);
+            color: var(--text-color);
+            font-size: 1em;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+            font-family: var(--mono-font);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input[type="text"]::placeholder, textarea::placeholder {
+            color: #777;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
+        }
+
+        button:hover {
+            background-color: #00d9f4;
+            transform: translateY(-2px);
+        }
+
+        #tool-result {
+            margin-top: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+            min-height: 100px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-family: var(--mono-font);
+            color: #e0e0e0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .result-group {
+            margin-bottom: 25px;
+        }
+
+        .result-group h3 {
+            color: #90d0ff;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(144, 208, 255, 0.3);
+            padding-bottom: 5px;
+        }
+
+        .result-group ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .result-group li {
+            background-color: rgba(0, 188, 212, 0.1);
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border-left: 3px solid var(--accent-color);
+            transition: background-color 0.2s ease;
+            font-size: 0.95em;
+        }
+        
+        .result-group li:hover {
+            background-color: rgba(0, 188, 212, 0.2);
+        }
+
+        .value-prop-section {
+            grid-column: 1;
+            text-align: center;
+        }
+
+        .value-prop-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #f0f0f0;
+        }
+
+        .value-prop-section .prop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .prop-item {
+            background-color: var(--gradient-start);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .prop-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .prop-item h3 {
+            color: var(--accent-color);
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .prop-item p {
+            color: #c0c0e0;
+            font-size: 0.95em;
+        }
+
+        .seo-section {
+            grid-column: 1;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        .seo-section h2 {
+            color: var(--accent-color);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(0, 188, 212, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .seo-section p {
+            color: #b0b0d0;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        .seo-section ul {
+            list-style: disc;
+            padding-left: 20px;
+            color: #b0b0d0;
+            margin-bottom: 15px;
+        }
+        .seo-section li {
+            margin-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: 2fr 1fr;
+            }
+            .tool-section {
+                grid-column: 1 / 2;
+            }
+            .results-section {
+                grid-column: 2 / 3;
+            }
+            .value-prop-section {
+                grid-column: 1 / 3;
+            }
+            .seo-section {
+                grid-column: 1 / 3;
+            }
+        }
+    </style>
+    <meta name="description" content="Propulsez votre contenu avec des titres qui captivent. Notre outil analyse vos idées pour générer instantanément des accroches percutantes, optimisées pour l&#x27;engagement et le référencement.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://generateur-de-titres-innovants-1.onrender.com">
+    <meta property="og:title" content="Générateur de Titres Innovants">
+    <meta property="og:description" content="Propulsez votre contenu avec des titres qui captivent. Notre outil analyse vos idées pour générer instantanément des accroches percutantes, optimisées pour l&#x27;engagement et le référencement.">
+    <meta property="og:url" content="https://generateur-de-titres-innovants-1.onrender.com">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Générateur de Titres Innovants", "description": "Propulsez votre contenu avec des titres qui captivent. Notre outil analyse vos idées pour générer instantanément des accroches percutantes, optimisées pour l'engagement et le référencement.", "url": "https://generateur-de-titres-innovants-1.onrender.com", "applicationCategory": "UtilityApplication", "operatingSystem": "Web Browser"}</script>
+</head>
+<body data-site-slug="generateur-de-titres-innovants-1" data-runtime-mode="analysis_tool">
+    <header>
+        <h1>Générateur de Titres Ultra-Performants</h1>
+        <p>Propulsez votre contenu avec des titres qui captivent. Notre outil analyse vos idées pour générer instantanément des accroches percutantes, optimisées pour l'engagement et le référencement.</p>
+    </header>
+
+    <main>
+        <section class="card tool-section">
+            <h2>Détails du Sujet</h2>
+            <form id="tool-form">
+                <label for="keyword">Mot-clé principal (ex: "marketing digital", "recettes vegan")</label>
+                <input type="text" id="keyword" placeholder="Saisissez votre mot-clé" required>
+
+                <label for="topic-description">Décrivez votre contenu en quelques mots</label>
+                <textarea id="topic-description" placeholder="Ex: 'un guide pour débutants sur l'investissement immobilier', 'les avantages d'une alimentation saine pour la productivité'" required></textarea>
+
+                <label for="target-audience">Public Cible (ex: "entrepreneurs", "jeunes parents", "passionnés de tech")</label>
+                <input type="text" id="target-audience" placeholder="Qui voulez-vous atteindre?">
+
+                <button type="submit" id="tool-submit">Générer les Titres</button>
+            </form>
+        </section>
+
+        <section class="card results-section">
+            <h2>Vos Titres Suggestionnés</h2>
+            <div id="tool-result">
+                <p id="result-detail">Vos titres apparaîtront ici après la génération. Préparez-vous à être inspiré !</p>
+            </div>
+        </section>
+
+        <section class="card value-prop-section">
+            <h2>Pourquoi des Titres de Qualité Sont Essentiels ?</h2>
+            <div class="prop-grid">
+                <div class="prop-item">
+                    <h3>Engagement Accru</h3>
+                    <p>Un titre accrocheur est la première étape pour capter l'attention et inciter au clic, augmentant ainsi le temps passé sur votre contenu.</p>
+                </div>
+                <div class="prop-item">
+                    <h3>Visibilité Optimale</h3>
+                    <p>Des titres optimisés améliorent votre référencement naturel (SEO), rendant votre contenu plus facile à trouver sur les moteurs de recherche.</p>
+                </div>
+                <div class="prop-item">
+                    <h3>Crédibilité Renforcée</h3>
+                    <p>Un titre clair et pertinent projette une image professionnelle et fiable de votre marque ou de votre expertise.</p>
+                </div>
+                <div class="prop-item">
+                    <h3>Conversions Améliorées</h3>
+                    <p>Que ce soit pour une vente, une inscription ou un partage, un bon titre prépare le terrain pour une action réussie de la part de votre audience.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="seo-section">
+        <h2>Optimiser vos Titres : Stratégies pour le Marché Français</h2>
+        <p>Dans le paysage numérique français, un titre bien conçu est la clé de la visibilité et de l'engagement. Notre générateur de titres est conçu pour vous aider à maîtriser l'art de l'accroche, en tenant compte des spécificités du public francophone. Que vous cherchiez des <strong>idées de titres pour blog</strong>, des <strong>accroches YouTube percutantes</strong>, ou des <strong>titres SEO optimisés</strong> pour votre site web, cet outil est votre allié.</p>
+        <p>Un <strong>bon titre d'article</strong> ou de vidéo doit non seulement informer, mais aussi créer un appel à l'action subtil, susciter la curiosité ou promettre une solution. En France, l'approche peut varier :</p>
+        <ul>
+            <li><strong>Titres informatifs et directs</strong> pour les contenus éducatifs et tutoriels.</li>
+            <li><strong>Titres à question</strong> pour engager l'utilisateur et piquer sa curiosité ("Comment... ?", "Pourquoi... ?").</li>
+            <li><strong>Titres avec chiffres ou listes</strong> ("5 astuces pour...", "Les 10 meilleurs..."), très efficaces pour le partage.</li>
+            <li><strong>Titres émotionnels ou provocateurs</strong>, à utiliser avec discernement pour des contenus qui visent à faire réagir.</li>
+        </ul>
+        <p>Notre outil vous aide à générer des <strong>idées de titres créatifs</strong>, à reformuler vos <strong>titres pour capter l'attention</strong>, et à trouver des <strong>titres percutants pour réseaux sociaux</strong>. Que vous soyez un rédacteur web, un marketeur digital ou un créateur de contenu, maximisez l'impact de chaque publication avec des titres qui résonnent avec votre audience française. Explorez les variantes "SEO", "Clickbait", "Expert", "Soft" et "Commercial" pour trouver le ton parfait adapté à votre message et à vos objectifs.</p>
+        <p>Découvrez comment <strong>créer des titres qui attirent</strong> et augmentent votre taux de clics (CTR). Adoptez une approche stratégique pour vos <strong>titres de vidéos</strong>, <strong>titres d'e-mails</strong>, et <strong>titres de publicités</strong> afin de vous démarquer dans la compétition en ligne. Gagner la "bataille du clic" commence toujours par un titre irrésistible.</p>
+    </section>
+
+    <script>
+        document.getElementById('tool-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const keyword = document.getElementById('keyword').value;
+            const topicDescription = document.getElementById('topic-description').value;
+            const targetAudience = document.getElementById('target-audience').value;
+            const resultDiv = document.getElementById('tool-result');
+
+            if (!keyword || !topicDescription) {
+                resultDiv.innerHTML = '<p style="color: #ff6b6b;">Veuillez remplir au moins le mot-clé principal et la description du contenu.</p>';
+                return;
+            }
+
+            const titles = generateTitles(keyword, topicDescription, targetAudience);
+            let htmlContent = '';
+
+            for (const style in titles) {
+                htmlContent += `<div class="result-group"><h3>${style.charAt(0).toUpperCase() + style.slice(1)}</h3><ul>`;
+                titles[style].forEach(title => {
+                    htmlContent += `<li>${title}</li>`;
+                });
+                htmlContent += '</ul></div>';
+            }
+            
+            resultDiv.innerHTML = htmlContent;
+        });
+
+        function generateTitles(keyword, description, audience) {
+            const commonPhrases = [
+                `Le Guide Ultime de ${keyword}`,
+                `Maîtrisez ${keyword} : Le Tutoriel Complet`,
+                `Découvrez les Secrets de ${keyword}`,
+                `${keyword} : Tout ce que Vous Devez Savoir`,
+                `L'Essentiel de ${keyword} pour ${audience || 'Tous'}`,
+                `Révolutionnez Votre Approche de ${keyword}`,
+                `Optimiser ${keyword} : Les Meilleures Pratiques`,
+                `Comment Réussir dans ${keyword} en ${new Date().getFullYear()}`,
+                `Les Erreurs à Éviter en ${keyword}`,
+                `Boostez vos Résultats avec ${keyword}`,
+                `${description.length > 50 ? description.substring(0, 50) + '...' : description} : L'Expertise ${keyword}`,
+            ];
+
+            const seoTitles = [
+                `${keyword} : Guide Complet pour ${audience || 'Débutants'}`,
+                `Tutoriel ${keyword} : Apprenez Facilement`,
+                `Meilleures Stratégies ${keyword} en ${new Date().getFullYear()}`,
+                `${keyword} France : Tendances et Conseils`,
+                `Qu'est-ce que ${keyword} ? Définition et Application`,
+                `${keyword} pour ${audience || 'Entrepreneurs'} : Maximisez Votre Impact`,
+                `Comparatif ${keyword} : Choisissez la Bonne Approche`,
+                `Actualités ${keyword} : Les Dernières Innovations`,
+                `${keyword} : Exemples Concrets et Études de Cas`,
+            ].filter(t => t.includes(keyword));
+
+            const clickbaitTitles = [
+                `😱 Ne Faites JAMAIS Ça avec ${keyword} !`,
+                `Le Secret Choquant de ${keyword} Révélé !`,
+                `Ce que les Experts ne Vous Disent PAS sur ${keyword}`,
+                `Vous Utilisez ${keyword} de la Mauvaise Manière ?`,
+                `La Vérité Inavouable sur ${keyword}`,
+                `Arrêtez Tout : Voici Pourquoi ${keyword} Change la Donne !`,
+                `Évitez cette Erreur FATALE en ${keyword}`,
+                `L'Astuce ${keyword} que Personne ne Connaît`,
+                `Le #1 ${keyword} que Tout le Monde Devrait Utiliser`,
+            ].filter(t => t.includes(keyword));
+
+            const expertTitles = [
+                `Analyse Approfondie de ${keyword} : Perspectives 2024`,
+                `${keyword} : De la Théorie à la Pratique Avancée`,
+                `Méthodologies Innovantes en ${keyword}`,
+                `Cas d'Étude : Succès et Échecs de ${keyword}`,
+                `L'Algorithme de ${keyword} Démystifié`,
+                `Tendances Futures de ${keyword} : Une Vision Proactive`,
+                `Frameworks et Outils pour ${keyword} Performant`,
+                `L'Impact de ${keyword} sur le Marché : Une Étude Détaillée`,
+                `Optimisation Avancée de ${keyword} : Techniques Inédites`,
+            ].filter(t => t.includes(keyword));
+
+            const softTitles = [
+                `Explorer l'Univers de ${keyword} avec Sérénité`,
+                `Votre Chemin Vers la Maîtrise de ${keyword}`,
+                `Cultiver Votre Potentiel avec ${keyword}`,
+                `Petits Pas pour un Grand Changement en ${keyword}`,
+                `Harmonie et Efficacité Grâce à ${keyword}`,
+                `L'Art de ${keyword} : Une Approche Douce`,
+                `S'Épanouir avec ${keyword} : Conseils Bienveillants`,
+                `${keyword} : Laissez-vous Guider`,
+                `Prenez Soin de Votre ${keyword} : Astuces Quotidiennes`,
+            ].filter(t => t.includes(keyword));
+
+            const commercialTitles = [
+                `Augmentez Vos Ventes avec Notre Solution ${keyword}`,
+                `Transformez Votre Entreprise Grâce à ${keyword}`,
+                `${keyword} : L'Investissement Qui Rapporte`,
+                `Découvrez Notre Offre Exclusive ${keyword}`,
+                `Votre Succès Commence avec Notre Expertise ${keyword}`,
+                `Optimisez Vos Profits avec ${keyword} Pro`,
+                `La Plateforme ${keyword} Qui Change Tout`,
+                `Réalisez Vos Objectifs avec Nos Services ${keyword}`,
+                `${keyword} : L'Outil Indispensable pour ${audience || 'Votre Business'}`,
+            ].filter(t => t.includes(keyword));
+
+            return {
+                seo: [...new Set(shuffleArray(seoTitles).slice(0, 3).concat(shuffleArray(commonPhrases).slice(0, 1)))],
+                clickbait: [...new Set(shuffleArray(clickbaitTitles).slice(0, 3).concat(shuffleArray(commonPhrases).slice(0, 1)))],
+                expert: [...new Set(shuffleArray(expertTitles).slice(0, 3).concat(shuffleArray(commonPhrases).slice(0, 1)))],
+                soft: [...new Set(shuffleArray(softTitles).slice(0, 3).concat(shuffleArray(commonPhrases).slice(0, 1)))],
+                commercial: [...new Set(shuffleArray(commercialTitles).slice(0, 3).concat(shuffleArray(commonPhrases).slice(0, 1)))],
+            };
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+    </script>
+<div id="qa-smoke-result" hidden></div>
+<script id="farmbuilder-affiliate-helper">
+(function () {
+  window.__UTILITY_AFFILIATE_MAP = window.__UTILITY_AFFILIATE_MAP || {};
+  document.addEventListener("click", function (event) {
+    const target = event.target.closest("[data-affiliate-slot]");
+    if (!target) return;
+    const slot = target.getAttribute("data-affiliate-slot");
+    const href = window.__UTILITY_AFFILIATE_MAP[slot];
+    if (!href) return;
+    if (target.tagName && target.tagName.toLowerCase() === "a") {
+      target.setAttribute("href", href);
+      target.removeAttribute("rel");
+      return;
+    }
+    event.preventDefault();
+    window.open(href, "_blank");
+  }, true);
+})();
+</script>
+<script id="farmbuilder-functional-qa">
+(function () {
+  function marker() {
+    let node = document.getElementById("qa-smoke-result");
+    if (node) return node;
+    node = document.createElement("div");
+    node.id = "qa-smoke-result";
+    node.hidden = true;
+    document.body.appendChild(node);
+    return node;
+  }
+
+  let qaFinished = false;
+  let qaWatchdog = null;
+
+  function normalize(text) {
+    return String(text || "").replace(/\s+/g, " ").trim();
+  }
+
+  function findForm() {
+    return document.getElementById("tool-form") || document.querySelector("form");
+  }
+
+  function findResult() {
+    return (
+      document.getElementById("tool-result") ||
+      document.querySelector("[data-result]") ||
+      document.querySelector(".tool-result, .result-card, .result, .results, .output, .preview, .diagnostic, .analysis")
+    );
+  }
+
+  function primaryAction(form) {
+    if (!form) return null;
+    return (
+      document.getElementById("tool-submit") ||
+      form.querySelector("#tool-submit") ||
+      form.querySelector("[data-primary-action]") ||
+      form.querySelector("button[type=submit]") ||
+      form.querySelector("button") ||
+      form.querySelector("input[type=submit]")
+    );
+  }
+
+  function resultSignature(node) {
+    if (!node) return "";
+    const text = normalize(node.textContent);
+    const html = normalize(node.innerHTML).slice(0, 600);
+    return `${text}||${html}`;
+  }
+
+  function resultHeadline(node) {
+    if (!node) return "";
+    const heading = node.querySelector("h1, h2, h3, strong, b");
+    return normalize(heading ? heading.textContent : "");
+  }
+
+  function sampleText(field) {
+    const key = `${field.id || ""} ${field.name || ""} ${field.placeholder || ""}`.toLowerCase();
+    if (/email/.test(key)) return "bonjour@example.com";
+    if (/url|site|website|lien/.test(key)) return "https://example.com/offre-solaire";
+    if (/phone|tel|mobile/.test(key)) return "0612345678";
+    if (/ville|city|localisation|location|region|departement|postal/.test(key)) return "Paris";
+    if (/orientation/.test(key)) return "sud";
+    if (/keyword|theme|topic|sujet|subject/.test(key)) return "energie solaire domestique";
+    if (/titre|title/.test(key)) return "Simulateur solaire maison";
+    if (/nom|name|project/.test(key)) return "Projet Horizon";
+    if (/description|notes|content|message/.test(key)) return "Maison individuelle exposee sud avec toiture exploitable.";
+    return field.placeholder || "France";
+  }
+
+  function sampleNumber(field) {
+    const key = `${field.id || ""} ${field.name || ""}`.toLowerCase();
+    if (/inclinaison|angle|slope/.test(key)) return "30";
+    if (/surface|size|m2|sqm/.test(key)) return "28";
+    if (/annee|year/.test(key)) return "2024";
+    if (/prix|price|budget|cost|amount|montant/.test(key)) return "12000";
+    const min = Number(field.min || "");
+    const max = Number(field.max || "");
+    if (Number.isFinite(min) && Number.isFinite(max) && max >= min) {
+      return String(Math.min(max, Math.max(min, min + Math.round((max - min) * 0.35))));
+    }
+    if (Number.isFinite(min)) return String(Math.max(min, 12));
+    if (Number.isFinite(max)) return String(Math.min(max, 12));
+    return field.value || "12";
+  }
+
+  function applySample(field) {
+    const tag = (field.tagName || "").toLowerCase();
+    const type = (field.type || "").toLowerCase();
+    if (field.disabled) return;
+    if (type === "hidden" || type === "submit" || type === "button" || type === "reset" || type === "image" || type === "file") {
+      return;
+    }
+    const currentValue = normalize(field.value);
+    if (tag === "select") {
+      if (currentValue) return;
+      const option = Array.from(field.options || []).find((item) => item.value && !item.disabled) || field.options[0];
+      if (option) field.value = option.value;
+      return;
+    }
+    if (type === "checkbox") {
+      if (field.checked) return;
+      field.checked = true;
+      return;
+    }
+    if (type === "radio") {
+      if (field.checked) return;
+      field.checked = true;
+      return;
+    }
+    if (type === "date") {
+      if (currentValue) return;
+      field.value = "2026-03-01";
+      return;
+    }
+    if (type === "email") {
+      if (currentValue) return;
+      field.value = "bonjour@example.com";
+      return;
+    }
+    if (type === "url") {
+      if (currentValue) return;
+      field.value = "https://example.com/offre-solaire";
+      return;
+    }
+    if (type === "tel") {
+      if (currentValue) return;
+      field.value = "0612345678";
+      return;
+    }
+    if (type === "color") {
+      if (currentValue) return;
+      field.value = "#2f855a";
+      return;
+    }
+    if (type === "number" || type === "range") {
+      if (currentValue) return;
+      field.value = sampleNumber(field);
+      return;
+    }
+    if (currentValue) return;
+    field.value = sampleText(field);
+  }
+
+  function stamp(status, detail, headline, primary) {
+    if (qaFinished) return;
+    qaFinished = true;
+    if (qaWatchdog) {
+      window.clearTimeout(qaWatchdog);
+      qaWatchdog = null;
+    }
+    const node = marker();
+    node.dataset.status = status;
+    node.dataset.mode = "native-form";
+    node.dataset.detail = detail || "";
+    node.dataset.headline = headline || "";
+    node.dataset.primary = primary || "";
+    node.dataset.viewport = window.innerWidth <= 640 ? "mobile" : "desktop";
+    window.setTimeout(function () {
+      try {
+        window.stop();
+      } catch (_error) {}
+    }, 0);
+  }
+
+  function installModalGuards() {
+    const noop = function () {};
+    const approve = function () { return true; };
+    const empty = function () { return ""; };
+    try { window.alert = noop; } catch (_error) {}
+    try { window.confirm = approve; } catch (_error) {}
+    try { window.prompt = empty; } catch (_error) {}
+  }
+
+  function triggerAction(form, action) {
+    try {
+      if (typeof form.requestSubmit === "function") {
+        form.requestSubmit(action || undefined);
+        return;
+      }
+    } catch (_error) {}
+    if (action && typeof action.click === "function") {
+      action.click();
+      return;
+    }
+    form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+  }
+
+  function inspectResult(before, attemptsLeft) {
+    const result = findResult();
+    if (!result) {
+      stamp("fail", "La zone de resultat est introuvable.", "");
+      return;
+    }
+    const after = resultSignature(result);
+    const text = normalize(result.textContent);
+    if (after && after !== before && text.length >= 24) {
+      const primary = result.querySelector("a[href], button[data-href], [data-primary-url]") || document.querySelector("#tool-result a[href]");
+      stamp("pass", "Le formulaire natif a mis a jour la zone de resultat.", resultHeadline(result), primary ? (primary.getAttribute("href") || primary.getAttribute("data-primary-url") || "") : "");
+      return;
+    }
+    if (attemptsLeft > 0) {
+      window.setTimeout(function () {
+        inspectResult(before, attemptsLeft - 1);
+      }, 250);
+      return;
+    }
+    stamp("fail", "La zone de resultat n'a pas renvoye de contenu exploitable.", resultHeadline(result));
+  }
+
+  function runSmoke() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("__qa") !== "functional") return;
+    qaWatchdog = window.setTimeout(function () {
+      stamp("fail", "QA smoke timed out before the page reported a usable result.", "");
+    }, 7000);
+    const form = findForm();
+    if (!form) {
+      stamp("fail", "Le formulaire principal est introuvable.", "");
+      return;
+    }
+    const result = findResult();
+    const before = resultSignature(result);
+    installModalGuards();
+    try {
+      form.querySelectorAll("input, select, textarea").forEach(applySample);
+    } catch (error) {
+      stamp("fail", error && error.message ? `QA smoke sample failed: ${error.message}` : "QA smoke sample failed before submit.", "");
+      return;
+    }
+    const action = primaryAction(form);
+    try {
+      triggerAction(form, action);
+    } catch (error) {
+      stamp("fail", error && error.message ? `QA smoke submit failed: ${error.message}` : "QA smoke submit failed.", "");
+      return;
+    }
+    inspectResult(before, 10);
+  }
+
+  window.addEventListener("error", function (event) {
+    const message = event && event.message ? event.message : "JavaScript runtime error during QA smoke.";
+    stamp("fail", `QA smoke JS error: ${message}`, "");
+  }, { once: true });
+
+  window.addEventListener("unhandledrejection", function (event) {
+    const reason = event && event.reason;
+    const detail = typeof reason === "string"
+      ? reason
+      : reason && reason.message
+        ? reason.message
+        : "Unhandled promise rejection during QA smoke.";
+    stamp("fail", `QA smoke rejection: ${detail}`, "");
+  }, { once: true });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      window.setTimeout(runSmoke, 60);
+    }, { once: true });
+  } else {
+    window.setTimeout(runSmoke, 60);
+  }
+})();
+</script>
+</body>
+</html>
