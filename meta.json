@@ -1,0 +1,46 @@
+{
+  "name": "Générateur de Titres Innovants",
+  "description": "Propulsez votre contenu avec des titres qui captivent. Notre outil analyse vos idées pour générer instantanément des accroches percutantes, optimisées pour l'engagement et le référencement.",
+  "theme": "tool",
+  "design_theme": "future-in-motion",
+  "structure_preset": "split-command",
+  "render_direction": "studio-split",
+  "page_blueprint": "briefing-board",
+  "language": "fr",
+  "country": "FR",
+  "url": null,
+  "expected_url": "https://generateur-de-titres-innovants-1.onrender.com",
+  "created": "2026-06-11T01:36:19.768134+00:00",
+  "owner_user_id": "user-1774825923424-663",
+  "owner_username": "inso",
+  "owner_display_name": "Inso",
+  "provider_space_id": "new-sites",
+  "provider_space_name": "New Sites",
+  "status": "generated",
+  "run_id": "run-1781141745285",
+  "external_site_request_id": null,
+  "external_client_ref": null,
+  "external_source_label": null,
+  "source_type": "generated",
+  "publish_target": "render",
+  "mode": "production",
+  "github": {
+    "status": "pending"
+  },
+  "deployment": {
+    "status": "pending"
+  },
+  "qa": {
+    "status": "pending"
+  },
+  "features": [
+    "Hero pattern: split",
+    "Proof module: metrics",
+    "Design theme: Future in Motion",
+    "Render direction: Studio Split",
+    "Page blueprint: Briefing Board",
+    "Runtime mode: analysis_tool",
+    "Generation mode: direct_html",
+    "Artifact rendered, awaiting QA and deployment"
+  ]
+}
